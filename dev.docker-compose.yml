@@ -1,0 +1,27 @@
+version: '3.8'
+name: splitwiser
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: dev.Dockerfile
+    container_name: splitwiser-server
+    ports:
+      - 3000:3000
+    volumes:
+     - ./server:/app
+     - /app/node_modules
+    command: ["npm", "run", "dev"]
+
+  client:
+    build:
+      context: ./client
+      dockerfile: dev.Dockerfile
+    container_name: splitwiser-client
+    ports:
+     - 5173:5173
+    volumes:
+     - ./client:/app
+     - /app/node_modules
+    command: ["npm", "run", "dev"]
